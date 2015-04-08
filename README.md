@@ -1,9 +1,14 @@
 # Callback-Hell
 This is a small talk about Node I eventually plan on giving
 
+## What is node? 
+Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
 
+It's fast as hell. Because it essentially forces the processor to multithread as many things as possible. 
 
+## Asynchronous
 
+## Callbacks
 I am going to try to keep this dead simple. A "callback" is any function that is called by another function which takes the first function as a parameter. A lot of the time, a "callback" is a function that is called when something happens. That something can be called an "event" in programmer-speak.
 
 Imagine this scenario: You are expecting a package in a couple of days. The package is a gift for your neighbor. Therefore, once you get the package, you want it brought over the the neighbors. You are out of town, and so you leave instructions for your spouse.
