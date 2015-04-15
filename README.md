@@ -5,9 +5,8 @@ This is a small talk about Node I eventually plan on giving
 ```
 The following is straight off of the nodejs home page
 ```
-Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
+"Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices."
 
-It's fast as hell. Because it essentially forces the processor to multithread as many things as possible. 
 Here's a small HTTP server that sends hello world to anyone that pings it. 
 ```js
 var http = require('http');
@@ -17,9 +16,10 @@ http.createServer(function (req, res) {
 }).listen(1337, '127.0.0.1');
 console.log('Server running at http://127.0.0.1:1337/');
 ```
+It's also fast as hell. Because it essentially forces the programmer to multithread as many things as possible. 
 
 ## Asynchronous
-
+Speaking of multithreading, thats what nodeJS is. nodeJS uses an event loop to find everything that can be taken apart and run each of those pieces of code as a separate process. This results in code being much faster *by design* because it will end up not working until you do. 
 
 ## Callbacks
 I am going to try to keep this dead simple. A "callback" is any function that is called by another function which takes the first function as a parameter. 
