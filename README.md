@@ -40,15 +40,56 @@ In our example, the receiving of the package is the "event" and the bringing it 
 This kind of thinking is obvious in daily life, but computers don't have the same kind of common sense. Consider how programmers normally write to a file:
 
 fileObject = open(file)
-# now that we have WAITED for the file to open, we can write to it
+now that we have WAITED for the file to open, we can write to it
 fileObject.write("We are writing to the file.")
-# now we can continue doing the other, totally unrelated things our program does
+now we can continue doing the other, totally unrelated things our program does
 
 Here, we WAIT for the file to open, before we write to it. This "blocks" the flow of execution, and our program cannot do any of the other things it might need to do! What if we could do this instead:
 
-# we pass writeToFile (A CALLBACK FUNCTION!) to the open function
+we pass writeToFile (A CALLBACK FUNCTION!) to the open function
 fileObject = open(file, writeToFile)
-# execution continues flowing -- we don't wait for the file to be opened
-# ONCE the file is opened we write to it, but while we wait WE CAN DO OTHER THINGS!
+execution continues flowing -- we don't wait for the file to be opened
+ONCE the file is opened we write to it, but while we wait WE CAN DO OTHER THINGS!
 
 It turns out we do this with some languages and frameworks. It's pretty cool! Check out Node.js to get some real practice with this kind of thinking.
+
+Let's try a simple code example to get used to what's actually happening. Here's an example of some code using the twitter api to find some information. 
+
+This is a small code sample using `Express.js` to handle routing and serving up content. 
+
+```js
+/* when someone goes to 'ourpage.whatever/'  */
+app.get('/', function(req, res){
+// print out the response
+console.log(req);
+  // pass readTweets the function we want to execute afterwards 
+  readTweets(function(tweets) {
+    // this function content will be executed inside of the readTweets function
+    res.render('index', { content: tweets });
+  });
+});
+
+function readTweets(callback) {
+  // string buffer of tweets
+  var tweets = "";
+  twitterSearchClient.search({'q':query, 'geocode':city }, function(error, result) {
+      if (error){
+          console.log('Error: ' + (error.code ? error.code + ' ' + error.message : error.message));
+      }
+      if (result){
+        for(var i=0; i<result.statuses.length; i++){
+            tweets += result.statuses[i].text ;
+          }
+        }
+        /* 
+        execute the callback function passed to us from the calling function!
+        we're really saying
+        res.render('index', { content: tweets });
+        */
+        callback(tweets);
+        /* remember the name 'callback' here is arbitrary!  */
+      }
+  );
+}
+```
+
