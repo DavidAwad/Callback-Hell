@@ -60,9 +60,7 @@ This is a small code sample using `Express.js` to handle routing and serving up 
 ```js
 /* when someone goes to 'ourpage.whatever/'  */
 app.get('/', function(req, res){
-// print out the response
-console.log(req);
-  // pass readTweets the function we want to execute afterwards 
+  // pass readTweets the function we want to execute as an argument.
   readTweets(function(tweets) {
     // this function content will be executed inside of the readTweets function
     res.render('index', { content: tweets });
